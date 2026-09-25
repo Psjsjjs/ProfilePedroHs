@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedro Henrique — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F2A47;
+    --navy-light:#2E5C8A;
+    --gray-bg:#F2F4F7;
+    --white:#FFFFFF;
+    --text:#1C2733;
+    --text-soft:#5B6773;
+    --line:#E1E6EB;
+    --accent:#3E8E7E;
+    --radius:6px;
+    --maxw:1040px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--white);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .logo{font-weight:700;font-size:1.05rem;color:var(--navy);}
+  nav ul{display:flex;gap:28px;list-style:none;}
+  nav a{font-size:0.92rem;font-weight:500;color:var(--text-soft);transition:color .15s;}
+  nav a:hover{color:var(--navy);}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--navy);margin:5px 0;}
+
+  /* Hero */
+  .hero{
+    background:var(--navy);
+    color:var(--white);
+    padding:72px 0 64px;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:36px;
+    align-items:center;
+  }
+  .avatar{
+    width:140px;height:140px;border-radius:50%;
+    background:var(--navy-light);
+    display:flex;align-items:center;justify-content:center;
+    font-size:2.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+    border:3px solid rgba(255,255,255,.25);
+  }
+  .hero h1{font-size:2.1rem;font-weight:600;margin-bottom:6px;}
+  .hero .headline{font-size:1.08rem;color:#C9D6E4;font-weight:500;margin-bottom:14px;}
+  .hero .loc{font-size:0.92rem;color:#9FB3C8;}
+  .hero .loc span{margin-right:16px;}
+  .hero-cta{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:10px 20px;border-radius:var(--radius);
+    font-size:0.9rem;font-weight:600;border:1px solid transparent;transition:opacity .15s;
+  }
+  .btn:hover{opacity:0.88;}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-ghost{border-color:rgba(255,255,255,.4);color:var(--white);}
+
+  /* Sections */
+  section{padding:64px 0;}
+  section.alt{background:var(--gray-bg);}
+  .section-title{
+    font-size:1.5rem;font-weight:600;color:var(--navy);
+    margin-bottom:8px;
+  }
+  .section-sub{color:var(--text-soft);font-size:0.98rem;margin-bottom:36px;max-width:640px;}
+
+  /* Sobre */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;}
+  .about-grid p{margin-bottom:14px;color:var(--text);font-size:0.98rem;}
+  .fact-list{list-style:none;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .fact-list li{
+    display:flex;justify-content:space-between;gap:12px;
+    padding:14px 18px;font-size:0.9rem;border-bottom:1px solid var(--line);
+    background:var(--white);
+  }
+  .fact-list li:last-child{border-bottom:none;}
+  .fact-list li b{color:var(--navy);font-weight:600;}
+  .fact-list li span:last-child{color:var(--text-soft);text-align:right;}
+
+  /* Timeline */
+  .timeline{position:relative;margin-left:8px;padding-left:32px;border-left:2px solid var(--line);}
+  .t-item{position:relative;padding-bottom:36px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:'';position:absolute;left:-39px;top:2px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--white);border:3px solid var(--navy-light);
+  }
+  .t-year{font-size:0.82rem;font-weight:600;color:var(--accent);letter-spacing:.02em;}
+  .t-role{font-size:1.05rem;font-weight:600;color:var(--navy);margin:4px 0 4px;}
+  .t-desc{font-size:0.92rem;color:var(--text-soft);max-width:560px;}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 48px;}
+  .skill-row{margin-bottom:20px;}
+  .skill-head{display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:7px;}
+  .skill-head b{color:var(--navy);font-weight:600;}
+  .skill-head span{color:var(--text-soft);}
+  .bar-track{height:8px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--accent);border-radius:99px;width:0;transition:width 1s ease;}
+
+  /* Recomendações */
+  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .rec-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;
+  }
+  .rec-text{font-size:0.94rem;color:var(--text);margin-bottom:16px;}
+  .rec-author{display:flex;align-items:center;gap:12px;}
+  .rec-avatar{
+    width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--white);
+    display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:600;
+    font-family:'Space Grotesk',sans-serif;flex-shrink:0;
+  }
+  .rec-name{font-size:0.88rem;font-weight:600;color:var(--navy);}
+  .rec-role{font-size:0.8rem;color:var(--text-soft);}
+
+  /* Contato / Footer */
+  footer{background:var(--navy);color:#C9D6E4;padding:48px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer h3{color:var(--white);font-size:1.15rem;margin-bottom:6px;}
+  footer p{font-size:0.88rem;color:#9FB3C8;}
+  .foot-links{display:flex;gap:20px;}
+  .foot-links a{font-size:0.88rem;color:#C9D6E4;transition:color .15s;}
+  .foot-links a:hover{color:var(--white);}
+
+  @media (max-width:760px){
+    nav ul{
+      position:fixed;top:64px;left:0;right:0;background:var(--white);
+      flex-direction:column;padding:18px 24px;gap:14px;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-8px);opacity:0;pointer-events:none;transition:.18s;
+    }
+    nav.open ul{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .nav-toggle{display:block;}
+    .hero .wrap{grid-template-columns:1fr;text-align:center;}
+    .avatar{margin:0 auto;}
+    .hero-cta{justify-content:center;}
+    .about-grid,.skills-grid,.rec-grid{grid-template-columns:1fr;}
+    footer .wrap{flex-direction:column;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Pedro Henrique</div>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#experiencia">Trajetória</a></li>
+        <li><a href="#competencias">Competências</a></li>
+        <li><a href="#recomendacoes">Recomendações</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="avatar">PH</div>
+    <div>
+      <h1>Pedro Henrique</h1>
+      <p class="headline">Estudante do 9º ano · Interessado em Tecnologia e Desenvolvimento Web</p>
+      <p class="loc"><span>📍 Cidade Tiradentes, São Paulo — SP</span><span>🎓 9º ano do Ensino Fundamental</span></p>
+      <div class="hero-cta">
+        <a href="#contato" class="btn btn-primary">Entrar em contato</a>
+        <a href="#experiencia" class="btn btn-ghost">Ver trajetória</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <h2 class="section-title">Sobre mim</h2>
+    <p class="section-sub">Quem eu sou e para onde estou caminhando.</p>
+    <div class="about-grid">
+      <div>
+        <p>Meu primeiro contato real com um computador foi durante a pandemia, quando um notebook chegou em casa e virou minha porta de entrada para o mundo digital. De início era só para as aulas remotas, mas com o tempo comecei a explorar o sistema, resolver problemas simples de configuração e ajudar familiares e vizinhos com dúvidas de informática — sem saber, ali nasceu meu interesse por tecnologia.</p>
+        <p>Hoje curso o 9º ano na zona leste de São Paulo, em Cidade Tiradentes, e ainda não tenho experiência formal em programação. Mas tenho o que muita gente demora a construir: curiosidade, disposição para aprender sozinho e conforto com computadores no dia a dia. Este portfólio é o ponto de partida de uma trajetória que estou construindo com intenção — não o resultado final.</p>
+      </div>
+      <ul class="fact-list">
+        <li><b>Idade</b><span>14 anos</span></li>
+        <li><b>Nascimento</b><span>2012</span></li>
+        <li><b>Escolaridade</b><span>9º ano</span></li>
+        <li><b>Localização</b><span>Cidade Tiradentes, SP</span></li>
+        <li><b>Área de interesse</b><span>Desenvolvimento Web</span></li>
+        <li><b>Primeiro contato com TI</b><span>2020 (pandemia)</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia" class="alt">
+  <div class="wrap">
+    <h2 class="section-title">Trajetória</h2>
+    <p class="section-sub">Os marcos que me trouxeram até aqui — escola, tecnologia e primeiros passos.</p>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-year">2020</div>
+        <div class="t-role">Primeiro contato com um notebook</div>
+        <div class="t-desc">Recebi um notebook durante a pandemia para acompanhar as aulas remotas. Foi o início do meu contato direto e constante com tecnologia.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-year">2021 – 2023</div>
+        <div class="t-role">Aprendizado autodidata de informática</div>
+        <div class="t-desc">Passei a explorar sistemas operacionais, resolver pequenos problemas técnicos e apoiar pessoas próximas com dúvidas básicas de computador e internet.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-year">2024 – atual</div>
+        <div class="t-role">Estudante do Ensino Fundamental — 9º ano</div>
+        <div class="t-desc">Concluindo o Ensino Fundamental em escola pública na zona leste de São Paulo, com interesse crescente por lógica, tecnologia e desenvolvimento web.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-year">Próximo passo</div>
+        <div class="t-role">Primeiros estudos em programação</div>
+        <div class="t-desc">Início de estudos estruturados em HTML, CSS e lógica de programação, com este portfólio como primeiro projeto documentado.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competencias">
+  <div class="wrap">
+    <h2 class="section-title">Competências</h2>
+    <p class="section-sub">Habilidades atuais, com honestidade sobre o nível de cada uma.</p>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-row">
+          <div class="skill-head"><b>Uso de computador e internet</b><span>Avançado</span></div>
+          <div class="bar-track"><div class="bar-fill" data-level="90"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><b>Resolução de problemas técnicos básicos</b><span>Intermediário</span></div>
+          <div class="bar-track"><div class="bar-fill" data-level="65"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><b>Pacote de escritório (Office/Google Docs)</b><span>Intermediário</span></div>
+          <div class="bar-track"><div class="bar-fill" data-level="60"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-row">
+          <div class="skill-head"><b>HTML &amp; CSS</b><span>Iniciante</span></div>
+          <div class="bar-track"><div class="bar-fill" data-level="25"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><b>Lógica de programação</b><span>Iniciante</span></div>
+          <div class="bar-track"><div class="bar-fill" data-level="20"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><b>Comunicação e proatividade</b><span>Intermediário</span></div>
+          <div class="bar-track"><div class="bar-fill" data-level="70"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recomendacoes" class="alt">
+  <div class="wrap">
+    <h2 class="section-title">Recomendações</h2>
+    <p class="section-sub">O que dizem sobre mim — substitua pelos depoimentos reais de professores, familiares ou colegas.</p>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <p class="rec-text">O Pedro sempre demonstrou curiosidade acima do esperado quando o assunto é tecnologia. É o tipo de aluno que pergunta o "porquê" das coisas.</p>
+        <div class="rec-author">
+          <div class="rec-avatar">PR</div>
+          <div><div class="rec-name">Nome do Professor</div><div class="rec-role">Professor(a), Escola Municipal</div></div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <p class="rec-text">Sempre que tenho algum problema no computador, é o Pedro quem resolve antes de eu nem entender o que aconteceu.</p>
+        <div class="rec-author">
+          <div class="rec-avatar">FM</div>
+          <div><div class="rec-name">Nome do Familiar</div><div class="rec-role">Familiar</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="wrap">
+    <div>
+      <h3>Vamos conversar</h3>
+      <p>seuemail@exemplo.com · São Paulo, SP</p>
+    </div>
+    <div class="foot-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="mailto:seuemail@exemplo.com">E-mail</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('mainNav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  // Barras de competência animam quando entram na tela
+  const bars = document.querySelectorAll('.bar-fill');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.style.width = el.dataset.level + '%';
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(bar => observer.observe(bar));
+</script>
+
+</body>
+</html>
