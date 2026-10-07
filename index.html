@@ -41,12 +41,12 @@
   img{max-width:100%;display:block;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
 
-  /* Fundo Animado Descontraído (Orbes Flutuantes Estilo High-End) */
+  /* Opção 1: Fundo Animado com Orbes de Gradiente Flutuantes */
   .bg-animation-container {
     position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
   }
   .orb {
-    position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.18;
+    position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.16;
     animation: floatOrb 14s ease-in-out infinite alternate;
   }
   .orb-1 { width: 450px; height: 450px; background: var(--accent); top: -10%; left: -5%; animation-delay: 0s; }
@@ -328,7 +328,7 @@
 </head>
 <body>
 
-<!-- Container de Fundo Animado (Orbes Flutuantes) -->
+<!-- Container de Fundo Animado com Orbes de Gradiente Flutuantes (Opção 1) -->
 <div class="bg-animation-container">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
