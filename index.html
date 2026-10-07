@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pedro Henrique — Portfólio</title>
+<title>Pedro Henrique — Portfólio Profissional</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,14 +11,16 @@
   :root{
     --navy:#0F2A47;
     --navy-light:#2E5C8A;
-    --gray-bg:#F2F4F7;
+    --gray-bg:#F8FAFC;
     --white:#FFFFFF;
     --text:#1C2733;
     --text-soft:#5B6773;
-    --line:#E1E6EB;
+    --line:#E2E8F0;
     --accent:#3E8E7E;
-    --radius:6px;
+    --accent-glow: rgba(62, 142, 126, 0.2);
+    --radius:8px;
     --maxw:1040px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -28,6 +30,7 @@
     background:var(--white);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
   }
   h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif;}
   a{color:inherit;text-decoration:none;}
@@ -36,131 +39,231 @@
 
   /* Header */
   header{
-    position:sticky;top:0;z-index:50;
-    background:var(--white);
+    position:sticky;top:0;z-index:100;
+    background:rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-bottom:1px solid var(--line);
+    transition: var(--transition);
   }
   header .wrap{
     display:flex;align-items:center;justify-content:space-between;
-    height:64px;
+    height:70px;
   }
-  .logo{font-weight:700;font-size:1.05rem;color:var(--navy);}
-  nav ul{display:flex;gap:28px;list-style:none;}
-  nav a{font-size:0.92rem;font-weight:500;color:var(--text-soft);transition:color .15s;}
+  .logo{font-weight:700;font-size:1.15rem;color:var(--navy);letter-spacing:-0.5px; transition: var(--transition);}
+  .logo:hover {transform: scale(1.02); color: var(--accent);}
+  nav ul{display:flex;gap:32px;list-style:none;}
+  nav a{
+    font-size:0.92rem;font-weight:500;color:var(--text-soft);
+    position:relative;padding:4px 0;transition: var(--transition);
+  }
+  nav a::after {
+    content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+    background:var(--accent); transition: width 0.3s ease;
+  }
   nav a:hover{color:var(--navy);}
+  nav a:hover::after{width:100%;}
   .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-  .nav-toggle span{display:block;width:22px;height:2px;background:var(--navy);margin:5px 0;}
+  .nav-toggle span{display:block;width:24px;height:2px;background:var(--navy);margin:6px 0;transition: var(--transition);}
 
   /* Hero */
   .hero{
-    background:var(--navy);
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3B5C 100%);
     color:var(--white);
-    padding:72px 0 64px;
+    padding:88px 0 76px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content:''; position: absolute; top:-50%; right:-20%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(62,142,126,0.15) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
   }
   .hero .wrap{
     display:grid;
-    grid-template-columns:140px 1fr;
-    gap:36px;
+    grid-template-columns:150px 1fr;
+    gap:40px;
     align-items:center;
+    position: relative;
+    z-index: 2;
   }
   .avatar{
-    width:140px;height:140px;border-radius:50%;
+    width:150px;height:150px;border-radius:50%;
     background:var(--navy-light);
     display:flex;align-items:center;justify-content:center;
-    font-size:2.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
-    border:3px solid rgba(255,255,255,.25);
+    font-size:2.8rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+    border:4px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: var(--transition);
   }
-  .hero h1{font-size:2.1rem;font-weight:600;margin-bottom:6px;}
-  .hero .headline{font-size:1.08rem;color:#C9D6E4;font-weight:500;margin-bottom:14px;}
-  .hero .loc{font-size:0.92rem;color:#9FB3C8;}
-  .hero .loc span{margin-right:16px;}
-  .hero-cta{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;}
+  .avatar:hover {
+    transform: scale(1.05) rotate(3deg);
+    border-color: var(--accent);
+    box-shadow: 0 15px 35px var(--accent-glow);
+  }
+  .hero h1{font-size:2.3rem;font-weight:700;margin-bottom:8px;letter-spacing:-0.5px;}
+  .hero .headline{font-size:1.12rem;color:#D8E2EC;font-weight:500;margin-bottom:16px;}
+  .hero .loc{font-size:0.94rem;color:#A8BCCF;display: flex; gap: 16px; flex-wrap: wrap;}
+  .hero-cta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;}
   .btn{
-    display:inline-block;padding:10px 20px;border-radius:var(--radius);
-    font-size:0.9rem;font-weight:600;border:1px solid transparent;transition:opacity .15s;
+    display:inline-block;padding:12px 24px;border-radius:var(--radius);
+    font-size:0.92rem;font-weight:600;border:2px solid transparent;
+    transition: var(--transition); cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  .btn:hover{opacity:0.88;}
-  .btn-primary{background:var(--accent);color:var(--white);}
-  .btn-ghost{border-color:rgba(255,255,255,.4);color:var(--white);}
+  .btn:hover{transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
+  .btn:active {transform: translateY(-1px);}
+  .btn-primary{background:var(--accent);color:var(--white); border-color: var(--accent);}
+  .btn-primary:hover {background: #347a6d; border-color: #347a6d;}
+  .btn-ghost{border-color:rgba(255,255,255,0.5);color:var(--white); background: transparent;}
+  .btn-ghost:hover{border-color:var(--white); background: rgba(255,255,255,0.08);}
 
   /* Sections */
-  section{padding:64px 0;}
+  section{padding:80px 0;}
   section.alt{background:var(--gray-bg);}
   .section-title{
-    font-size:1.5rem;font-weight:600;color:var(--navy);
-    margin-bottom:8px;
+    font-size:1.75rem;font-weight:700;color:var(--navy);
+    margin-bottom:10px; letter-spacing: -0.5px;
   }
-  .section-sub{color:var(--text-soft);font-size:0.98rem;margin-bottom:36px;max-width:640px;}
+  .section-sub{color:var(--text-soft);font-size:1.02rem;margin-bottom:44px;max-width:640px;}
 
   /* Sobre */
-  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;}
-  .about-grid p{margin-bottom:14px;color:var(--text);font-size:0.98rem;}
-  .fact-list{list-style:none;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start;}
+  .about-grid p{margin-bottom:16px;color:var(--text);font-size:1.02rem; line-height: 1.7;}
+  .fact-list{
+    list-style:none;border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden; background: var(--white);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    transition: var(--transition);
+  }
+  .fact-list:hover {box-shadow: 0 8px 24px rgba(15,42,71,0.08);}
   .fact-list li{
     display:flex;justify-content:space-between;gap:12px;
-    padding:14px 18px;font-size:0.9rem;border-bottom:1px solid var(--line);
-    background:var(--white);
+    padding:16px 20px;font-size:0.92rem;border-bottom:1px solid var(--line);
+    transition: var(--transition);
   }
+  .fact-list li:hover {background: var(--gray-bg); padding-left: 24px;}
   .fact-list li:last-child{border-bottom:none;}
   .fact-list li b{color:var(--navy);font-weight:600;}
   .fact-list li span:last-child{color:var(--text-soft);text-align:right;}
 
   /* Timeline */
-  .timeline{position:relative;margin-left:8px;padding-left:32px;border-left:2px solid var(--line);}
-  .t-item{position:relative;padding-bottom:36px;}
+  .timeline{position:relative;margin-left:12px;padding-left:36px;border-left:2px solid var(--line);}
+  .t-item{position:relative;padding-bottom:40px; transition: var(--transition);}
   .t-item:last-child{padding-bottom:0;}
   .t-item::before{
-    content:'';position:absolute;left:-39px;top:2px;
-    width:14px;height:14px;border-radius:50%;
+    content:'';position:absolute;left:-43px;top:2px;
+    width:16px;height:16px;border-radius:50%;
     background:var(--white);border:3px solid var(--navy-light);
+    transition: var(--transition);
   }
-  .t-year{font-size:0.82rem;font-weight:600;color:var(--accent);letter-spacing:.02em;}
-  .t-role{font-size:1.05rem;font-weight:600;color:var(--navy);margin:4px 0 4px;}
-  .t-desc{font-size:0.92rem;color:var(--text-soft);max-width:560px;}
+  .t-item:hover::before {
+    background: var(--accent);
+    border-color: var(--white);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+    transform: scale(1.15);
+  }
+  .t-year{font-size:0.85rem;font-weight:700;color:var(--accent);letter-spacing:.03em; margin-bottom: 4px;}
+  .t-role{font-size:1.12rem;font-weight:600;color:var(--navy);margin:0 0 6px;}
+  .t-desc{font-size:0.95rem;color:var(--text-soft);max-width:600px; line-height: 1.6;}
 
-  /* Skills */
+  /* Skills & Next Steps */
+  .skills-container {display: grid; grid-template-columns: 1fr; gap: 48px;}
+  .skills-category-title {
+    font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
   .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 48px;}
+  .skill-card {
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); transition: var(--transition);
+    transform-style: preserve-3d; perspective: 1000px;
+  }
+  .skill-card:hover {
+    box-shadow: 0 12px 30px rgba(15,42,71,0.08);
+    border-color: var(--navy-light);
+  }
   .skill-row{margin-bottom:20px;}
-  .skill-head{display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:7px;}
+  .skill-row:last-child{margin-bottom:0;}
+  .skill-head{display:flex;justify-content:space-between;font-size:0.92rem;margin-bottom:8px;}
   .skill-head b{color:var(--navy);font-weight:600;}
-  .skill-head span{color:var(--text-soft);}
-  .bar-track{height:8px;background:var(--line);border-radius:99px;overflow:hidden;}
-  .bar-fill{height:100%;background:var(--accent);border-radius:99px;width:0;transition:width 1s ease;}
+  .skill-head span{color:var(--text-soft); font-size: 0.85rem; font-weight: 500;}
+  .bar-track{height:10px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--navy-light);border-radius:99px;width:0;transition:width 1.2s cubic-bezier(0.1, 0.8, 0.3, 1);}
+  .bar-fill.accent {background: var(--accent);}
+
+  /* Seção de Foco: Robótica e Eletrônica (Próximos 5 Meses) */
+  .focus-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px;}
+  .focus-card {
+    background: linear-gradient(135deg, var(--white) 0%, var(--gray-bg) 100%);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+    position: relative; overflow: hidden; transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    transform-style: preserve-3d; perspective: 1000px;
+  }
+  .focus-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+    background: var(--accent); transition: var(--transition);
+  }
+  .focus-card:hover {
+    box-shadow: 0 15px 35px rgba(62, 142, 126, 0.15);
+    border-color: var(--accent);
+  }
+  .focus-tag {
+    display: inline-block; background: rgba(62,142,126,0.1); color: var(--accent);
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 4px 10px; border-radius: 99px; margin-bottom: 14px;
+  }
+  .focus-title { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .focus-desc { font-size: 0.92rem; color: var(--text-soft); line-height: 1.6; }
 
   /* Recomendações */
-  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
   .rec-card{
     background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
-    padding:24px;
+    padding:28px; transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    transform-style: preserve-3d; perspective: 1000px;
   }
-  .rec-text{font-size:0.94rem;color:var(--text);margin-bottom:16px;}
-  .rec-author{display:flex;align-items:center;gap:12px;}
+  .rec-card:hover {
+    box-shadow: 0 12px 30px rgba(15,42,71,0.08);
+    border-color: var(--navy-light);
+  }
+  .rec-text{font-size:0.96rem;color:var(--text);margin-bottom:20px; line-height: 1.7; font-style: italic;}
+  .rec-author{display:flex;align-items:center;gap:14px;}
   .rec-avatar{
-    width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--white);
-    display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:600;
-    font-family:'Space Grotesk',sans-serif;flex-shrink:0;
+    width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--white);
+    display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:700;
+    font-family:'Space Grotesk',sans-serif;flex-shrink:0; transition: var(--transition);
   }
-  .rec-name{font-size:0.88rem;font-weight:600;color:var(--navy);}
-  .rec-role{font-size:0.8rem;color:var(--text-soft);}
+  .rec-card:hover .rec-avatar {background: var(--accent); transform: scale(1.1);}
+  .rec-name{font-size:0.92rem;font-weight:700;color:var(--navy);}
+  .rec-role{font-size:0.82rem;color:var(--text-soft);}
 
   /* Contato / Footer */
-  footer{background:var(--navy);color:#C9D6E4;padding:48px 0;}
-  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  footer h3{color:var(--white);font-size:1.15rem;margin-bottom:6px;}
-  footer p{font-size:0.88rem;color:#9FB3C8;}
-  .foot-links{display:flex;gap:20px;}
-  .foot-links a{font-size:0.88rem;color:#C9D6E4;transition:color .15s;}
-  .foot-links a:hover{color:var(--white);}
+  footer{background:var(--navy);color:#D8E2EC;padding:60px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;}
+  footer h3{color:var(--white);font-size:1.25rem;margin-bottom:8px; letter-spacing: -0.5px;}
+  footer p{font-size:0.92rem;color:#A8BCCF;}
+  .foot-links{display:flex;gap:24px;}
+  .foot-links a{
+    font-size:0.92rem;color:#D8E2EC;transition: var(--transition);
+    position: relative; padding: 4px 0;
+  }
+  .foot-links a:hover{color:var(--white); transform: translateY(-2px);}
 
-  @media (max-width:760px){
+  @media (max-width:768px){
     nav ul{
-      position:fixed;top:64px;left:0;right:0;background:var(--white);
-      flex-direction:column;padding:18px 24px;gap:14px;
+      position:fixed;top:70px;left:0;right:0;background:var(--white);
+      flex-direction:column;padding:24px;gap:16px;
       border-bottom:1px solid var(--line);
-      transform:translateY(-8px);opacity:0;pointer-events:none;transition:.18s;
+      transform:translateY(-10px);opacity:0;pointer-events:none;transition:var(--transition);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
     nav.open ul{transform:translateY(0);opacity:1;pointer-events:auto;}
     .nav-toggle{display:block;}
+    .nav-toggle.active span:nth-child(1) {transform: rotate(45deg) translate(5px, 5px);}
+    .nav-toggle.active span:nth-child(2) {opacity: 0;}
+    .nav-toggle.active span:nth-child(3) {transform: rotate(-45deg) translate(5px, -5px);}
     .hero .wrap{grid-template-columns:1fr;text-align:center;}
     .avatar{margin:0 auto;}
     .hero-cta{justify-content:center;}
@@ -178,7 +281,7 @@
       <ul>
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#experiencia">Trajetória</a></li>
-        <li><a href="#competencias">Competências</a></li>
+        <li><a href="#competencias">Competências &amp; Foco</a></li>
         <li><a href="#recomendacoes">Recomendações</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
@@ -194,11 +297,11 @@
     <div class="avatar">PH</div>
     <div>
       <h1>Pedro Henrique</h1>
-      <p class="headline">Estudante do 9º ano · Interessado em Tecnologia e Desenvolvimento Web</p>
+      <p class="headline">Estudante do 9º ano · Desenvolvedor em Formação &amp; Entusiasta de Robótica e Eletrônica</p>
       <p class="loc"><span>📍 Cidade Tiradentes, São Paulo — SP</span><span>🎓 9º ano do Ensino Fundamental</span></p>
       <div class="hero-cta">
         <a href="#contato" class="btn btn-primary">Entrar em contato</a>
-        <a href="#experiencia" class="btn btn-ghost">Ver trajetória</a>
+        <a href="#competencias" class="btn btn-ghost">Ver competências</a>
       </div>
     </div>
   </div>
@@ -207,19 +310,19 @@
 <section id="sobre">
   <div class="wrap">
     <h2 class="section-title">Sobre mim</h2>
-    <p class="section-sub">Quem eu sou e para onde estou caminhando.</p>
+    <p class="section-sub">Quem eu sou, minha origem e para onde estou caminhando na tecnologia.</p>
     <div class="about-grid">
       <div>
-        <p>Meu primeiro contato real com um computador foi durante a pandemia, quando um notebook chegou em casa e virou minha porta de entrada para o mundo digital. De início era só para as aulas remotas, mas com o tempo comecei a explorar o sistema, resolver problemas simples de configuração e ajudar familiares e vizinhos com dúvidas de informática — sem saber, ali nasceu meu interesse por tecnologia.</p>
-        <p>Hoje curso o 9º ano na zona leste de São Paulo, em Cidade Tiradentes, e ainda não tenho experiência formal em programação. Mas tenho o que muita gente demora a construir: curiosidade, disposição para aprender sozinho e conforto com computadores no dia a dia. Este portfólio é o ponto de partida de uma trajetória que estou construindo com intenção — não o resultado final.</p>
+        <p>Meu primeiro contato real com um computador foi durante a pandemia em 2020, quando um notebook chegou em casa e virou minha porta de entrada para o mundo digital. De início era só para as aulas remotas, mas com o tempo comecei a explorar o sistema operacional, resolver problemas de configuração e ajudar familiares e vizinhos com dúvidas de informática — sem saber, ali nascia minha paixão por tecnologia.</p>
+        <p>Hoje curso o 9º ano na zona leste de São Paulo, em Cidade Tiradentes. Não tenho experiência formal de mercado ainda, mas construí uma sólida base autodidata, facilidade com lógica e muita curiosidade. Além do desenvolvimento web (HTML, CSS e JavaScript), estou direcionando meu foco atual para a <strong>robótica</strong> e a <strong>eletrônica</strong>, expandindo meus horizontes para o mundo físico e de sistemas embarcados.</p>
       </div>
       <ul class="fact-list">
-        <li><b>Idade</b><span>14 anos</span></li>
-        <li><b>Nascimento</b><span>2012</span></li>
-        <li><b>Escolaridade</b><span>9º ano</span></li>
-        <li><b>Localização</b><span>Cidade Tiradentes, SP</span></li>
-        <li><b>Área de interesse</b><span>Desenvolvimento Web</span></li>
-        <li><b>Primeiro contato com TI</b><span>2020 (pandemia)</span></li>
+        <li><b>Idade</b><span>14 anos (Nascido em 2012)</span></li>
+        <li><b>Escolaridade</b><span>9º ano do Ensino Fundamental</span></li>
+        <li><b>Localização</b><span>Cidade Tiradentes, São Paulo — SP</span></li>
+        <li><b>Foco Atual</b><span>Web, Robótica &amp; Eletrônica</span></li>
+        <li><b>Primeiro Contato com TI</b><span>2020 (Pandemia)</span></li>
+        <li><b>Perfil</b><span>Autodidata &amp; Proativo</span></li>
       </ul>
     </div>
   </div>
@@ -228,27 +331,27 @@
 <section id="experiencia" class="alt">
   <div class="wrap">
     <h2 class="section-title">Trajetória</h2>
-    <p class="section-sub">Os marcos que me trouxeram até aqui — escola, tecnologia e primeiros passos.</p>
+    <p class="section-sub">Os marcos e etapas que moldaram minha jornada até aqui.</p>
     <div class="timeline">
       <div class="t-item">
-        <div class="t-year">2020</div>
-        <div class="t-role">Primeiro contato com um notebook</div>
-        <div class="t-desc">Recebi um notebook durante a pandemia para acompanhar as aulas remotas. Foi o início do meu contato direto e constante com tecnologia.</div>
+        <div class="t-year">2020 — O Ponto de Partida</div>
+        <div class="t-role">Primeiro contato com computadores</div>
+        <div class="t-desc">Chegada do notebook em casa devido às aulas remotas da pandemia. Início da exploração autônoma de softwares e ferramentas digitais.</div>
       </div>
       <div class="t-item">
-        <div class="t-year">2021 – 2023</div>
-        <div class="t-role">Aprendizado autodidata de informática</div>
-        <div class="t-desc">Passei a explorar sistemas operacionais, resolver pequenos problemas técnicos e apoiar pessoas próximas com dúvidas básicas de computador e internet.</div>
+        <div class="t-year">2021 – 2023 — Suporte e Exploração</div>
+        <div class="t-role">Apoio técnico informal e curiosidade digital</div>
+        <div class="t-desc">Resolução de pequenos problemas de informática para familiares e vizinhos, aprofundando o raciocínio lógico e a familiaridade com hardware/software.</div>
       </div>
       <div class="t-item">
-        <div class="t-year">2024 – atual</div>
-        <div class="t-role">Estudante do Ensino Fundamental — 9º ano</div>
-        <div class="t-desc">Concluindo o Ensino Fundamental em escola pública na zona leste de São Paulo, com interesse crescente por lógica, tecnologia e desenvolvimento web.</div>
+        <div class="t-year">2024 – 2025 — Formação Escolar e Lógica</div>
+        <div class="t-role">Estudante do Ensino Fundamental (9º ano)</div>
+        <div class="t-desc">Consolidação dos estudos na rede pública em Cidade Tiradentes (SP) e primeiros passos no desenvolvimento web autodidata.</div>
       </div>
       <div class="t-item">
-        <div class="t-year">Próximo passo</div>
-        <div class="t-role">Primeiros estudos em programação</div>
-        <div class="t-desc">Início de estudos estruturados em HTML, CSS e lógica de programação, com este portfólio como primeiro projeto documentado.</div>
+        <div class="t-year">Próximos 5 Meses — Expansão Tecnológica</div>
+        <div class="t-role">Robótica, Eletrônica e Projetos Avançados</div>
+        <div class="t-desc">Foco intensivo na conquista de habilidades em robótica prática, circuitos eletrônicos e aprimoramento de códigos interativos.</div>
       </div>
     </div>
   </div>
@@ -256,37 +359,67 @@
 
 <section id="competencias">
   <div class="wrap">
-    <h2 class="section-title">Competências</h2>
-    <p class="section-sub">Habilidades atuais, com honestidade sobre o nível de cada uma.</p>
-    <div class="skills-grid">
+    <h2 class="section-title">Competências &amp; Foco de Crescimento</h2>
+    <p class="section-sub">Minhas habilidades atuais e o plano prático para os próximos 5 meses em Robótica e Eletrônica.</p>
+    
+    <div class="skills-container">
+      <!-- Seção de Habilidades Atuais -->
       <div>
-        <div class="skill-row">
-          <div class="skill-head"><b>Uso de computador e internet</b><span>Avançado</span></div>
-          <div class="bar-track"><div class="bar-fill" data-level="90"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-head"><b>Resolução de problemas técnicos básicos</b><span>Intermediário</span></div>
-          <div class="bar-track"><div class="bar-fill" data-level="65"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-head"><b>Pacote de escritório (Office/Google Docs)</b><span>Intermediário</span></div>
-          <div class="bar-track"><div class="bar-fill" data-level="60"></div></div>
+        <h3 class="skills-category-title">📊 Nível de Habilidades Atuais</h3>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-row">
+              <div class="skill-head"><b>Uso de Computador &amp; Internet</b><span>Avançado</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="92"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-head"><b>Resolução de Problemas Técnicos</b><span>Intermediário</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="70"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-head"><b>Pacote Office &amp; Ferramentas Google</b><span>Intermediário</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="65"></div></div>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-row">
+              <div class="skill-head"><b>HTML5 &amp; CSS3</b><span>Iniciante / Em evolução</span></div>
+              <div class="bar-track accent" data-level="45"></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-head"><b>Lógica de Programação &amp; JavaScript</b><span>Iniciante</span></div>
+              <div class="bar-track accent" data-level="35"></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-head"><b>Comunicação &amp; Proatividade</b><span>Intermediário</span></div>
+              <div class="bar-track" data-level="75"></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="skill-row">
-          <div class="skill-head"><b>HTML &amp; CSS</b><span>Iniciante</span></div>
-          <div class="bar-track"><div class="bar-fill" data-level="25"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-head"><b>Lógica de programação</b><span>Iniciante</span></div>
-          <div class="bar-track"><div class="bar-fill" data-level="20"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-head"><b>Comunicação e proatividade</b><span>Intermediário</span></div>
-          <div class="bar-track"><div class="bar-fill" data-level="70"></div></div>
+
+      <!-- Novas Habilidades: Robótica e Eletrônica (Próximos 5 Meses) -->
+      <div style="margin-top: 20px;">
+        <h3 class="skills-category-title">🚀 Em Conquista &amp; Próximos 5 Meses (Robótica &amp; Eletrônica)</h3>
+        <div class="focus-grid">
+          <div class="focus-card">
+            <span class="focus-tag">Em Conquista — Próximos 5 Meses</span>
+            <div class="focus-title">Robótica Educacional</div>
+            <div class="focus-desc">Estudo prático de montagem de robôs, sensores de proximidade, motores DC, lógica de controle e automação com microcontroladores (como Arduino).</div>
+          </div>
+          <div class="focus-card">
+            <span class="focus-tag">Em Conquista — Próximos 5 Meses</span>
+            <div class="focus-title">Eletrônica Básica &amp; Circuitos</div>
+            <div class="focus-desc">Compreensão de componentes fundamentais (resistores, capacitores, LEDs, protoboards), leitura de esquemas elétricos e soldagem básica.</div>
+          </div>
+          <div class="focus-card">
+            <span class="focus-tag">Desenvolvimento Contínuo</span>
+            <div class="focus-title">Desenvolvimento Web Avançado</div>
+            <div class="focus-desc">Aprofundamento em JavaScript moderno, animações CSS imersivas, design responsivo fluido e estruturação de portfólios profissionais.</div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -294,20 +427,20 @@
 <section id="recomendacoes" class="alt">
   <div class="wrap">
     <h2 class="section-title">Recomendações</h2>
-    <p class="section-sub">O que dizem sobre mim — substitua pelos depoimentos reais de professores, familiares ou colegas.</p>
+    <p class="section-sub">O que professores, familiares e colegas dizem sobre minha dedicação e perfil.</p>
     <div class="rec-grid">
       <div class="rec-card">
-        <p class="rec-text">O Pedro sempre demonstrou curiosidade acima do esperado quando o assunto é tecnologia. É o tipo de aluno que pergunta o "porquê" das coisas.</p>
+        <p class="rec-text">"O Pedro sempre demonstrou uma curiosidade impressionante quando o assunto é tecnologia. É o tipo de aluno que busca entender o funcionamento por trás das ferramentas."</p>
         <div class="rec-author">
           <div class="rec-avatar">PR</div>
-          <div><div class="rec-name">Nome do Professor</div><div class="rec-role">Professor(a), Escola Municipal</div></div>
+          <div><div class="rec-name">Professor(a)</div><div class="rec-role">Escola Municipal — SP</div></div>
         </div>
       </div>
       <div class="rec-card">
-        <p class="rec-text">Sempre que tenho algum problema no computador, é o Pedro quem resolve antes de eu nem entender o que aconteceu.</p>
+        <p class="rec-text">"Sempre que surge um problema de informática em casa ou com vizinhos, o Pedro resolve com facilidade e paciência. Tem um talento natural para a área."</p>
         <div class="rec-author">
           <div class="rec-avatar">FM</div>
-          <div><div class="rec-name">Nome do Familiar</div><div class="rec-role">Familiar</div></div>
+          <div><div class="rec-name">Familiar / Mentor</div><div class="rec-role">Cidade Tiradentes, SP</div></div>
         </div>
       </div>
     </div>
@@ -317,25 +450,35 @@
 <footer id="contato">
   <div class="wrap">
     <div>
-      <h3>Vamos conversar</h3>
-      <p>seuemail@exemplo.com · São Paulo, SP</p>
+      <h3>Vamos conversar e construir o futuro</h3>
+      <p>pedro.contato@exemplo.com · São Paulo, SP — Zona Leste</p>
     </div>
     <div class="foot-links">
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="mailto:seuemail@exemplo.com">E-mail</a>
+      <a href="https://github.com/psjsjjs" target="_blank">GitHub</a>
+      <a href="#contato">LinkedIn</a>
+      <a href="mailto:pedro.contato@exemplo.com">E-mail</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Menu mobile
+  // Menu mobile interativo com animação do botão
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
-  toggle.addEventListener('click', () => nav.classList.toggle('open'));
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+  
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    toggle.classList.toggle('active');
+  });
 
-  // Barras de competência animam quando entram na tela
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.classList.remove('active');
+    });
+  });
+
+  // Animação das barras de competência ao entrar na tela (Intersection Observer)
   const bars = document.querySelectorAll('.bar-fill');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -345,8 +488,31 @@
         observer.unobserve(el);
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.25 });
+  
   bars.forEach(bar => observer.observe(bar));
+
+  // Efeito dinâmico de profundidade / inclinação 3D nos cards ao passar o mouse
+  const cards = document.querySelectorAll('.skill-card, .focus-card, .rec-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 15;
+      const rotateY = (centerX - x) / 15;
+      
+      card.style.transform = `translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0px) rotateX(0deg) rotateY(0deg)';
+    });
+  });
 </script>
 
 </body>
